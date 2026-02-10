@@ -37,20 +37,6 @@
       font-size: 18px;
       opacity: 0.85;
     }
-    .photos{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap:14px;
-      margin-top: 18px;
-    }
-    .photos img{
-      width:100%;
-      height: 320px;
-      object-fit: cover;
-      border-radius: 18px;
-      border: 1px solid rgba(0,0,0,0.08);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    }
     .btns{
       display:flex;
       gap:12px;
@@ -70,13 +56,31 @@
     button:active{ transform: translateY(1px) scale(0.99); }
     .yes{ background:#ff3b7a; color:white; }
     .no{ background:#f1f1f1; color:#111; }
+
     #msg{
       margin-top: 14px;
       font-size: 20px;
       font-weight: 600;
+      min-height: 28px;
+    }
+
+    .photos{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap:14px;
+      margin-top: 18px;
+    }
+    .photos img{
+      width:100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     }
   </style>
 </head>
+
 <body>
   <div class="card">
     <div style="font-size:34px;">💘</div>
@@ -91,20 +95,49 @@
     <div id="msg"></div>
 
     <div class="photos">
-      <img src="1103.jpg" alt="Us 1" />
-      <img src="1104.jpg" alt="Us 2" />
+      <!-- =======================
+           CHANGE IMAGE LINES HERE
+           =======================
+           Put TWO images that show by default when the page loads.
+           These filenames must match EXACTLY what’s in your GitHub repo.
+      -->
+      <img id="photoA" src="hanul.jpg" alt="Us 1" />
+      <img id="photoB" src="clover.jpg" alt="Us 2" />
     </div>
   </div>
 
   <script>
+    // ==========================
+    // CHANGE IMAGE LINES HERE TOO
+    // ==========================
+    // Put the 2 "Yes" images and the 2 "No" images.
+    // Example filenames: "IMG_4143.JPG" etc (case-sensitive!)
+    const YES_PHOTOS = ["1103.jpg", "1104.jpg"];
+    const NO_PHOTOS  = ["1101.jpg",  "1102.jpg"];
+
+    function setPhotos(a, b){
+      document.getElementById("photoA").src = a;
+      document.getElementById("photoB").src = b;
+    }
+
     function sayYes(){
-      document.getElementById("msg").textContent = "YAY!! 💖🥰 I love you and see you soon! ddong go seki";
+      document.getElementById("msg").textContent = "YAY!! 💖🥰 I love you!";
+      setPhotos(YES_PHOTOS[0], YES_PHOTOS[1]);
       confetti();
     }
+
     function sayNo(){
-      document.getElementById("msg").textContent = "😭 okay but… are you sure? (no is not an answer for you boi) 💘";
+      document.getElementById("msg").textContent = "😭 okay but… are you sure? 💘";
+      setPhotos(NO_PHOTOS[0], NO_PHOTOS[1]);
     }
-    // tiny confetti (no libraries)
+
+    // Optional: preload so the swap is instant
+    [...YES_PHOTOS, ...NO_PHOTOS].forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    // Tiny confetti (no libraries)
     function confetti(){
       for (let i=0;i<80;i++){
         const s=document.createElement("div");
@@ -131,8 +164,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
